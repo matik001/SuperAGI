@@ -1,0 +1,35 @@
+version: '3.1'
+
+volumes:
+  psql_volume:
+  dependencies:
+
+
+services:
+  psql:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      POSTGRES_DB: superagi
+    volumes:
+      - psql_volume:/var/lib/postgresql/data
+    ports:
+      - "5432"
+      - "5010:5432"
+  backend:
+    build:
+      context: ./SuperAGIBackend
+      dockerfile: Dockerfile.development
+    restart: always
+    volumes:
+      - dependencies:/app/node_modules
+      - ./SuperAGIBackend:/app
+    ports:
+      - "5000:5000"
+      - "9229:9229"
+    env_file:
+      - .env
+    depends_on:
+      - psql

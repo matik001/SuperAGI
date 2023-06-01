@@ -1,0 +1,59 @@
+version: 2.1
+jobs:
+  build-backend:
+    docker:
+      - image: cimg/node:18.16
+    steps:
+      - checkout
+      - run: cd SuperAGIBackend
+      - run: npm install
+      - run: npm run build
+
+  build-frontend:
+    docker:
+      - image: cimg/node:18.16
+    steps:
+      - checkout
+      - run: echo "OK"
+
+  test-backend:
+    docker:
+      - image: cimg/node:18.16
+    steps:
+      - checkout
+      - run: echo "OK"
+
+  test-frontend:
+    docker:
+      - image: cimg/node:18.16
+    steps:
+      - checkout
+      - run: echo "OK"
+
+  deploy:
+    docker:
+      - image: cimg/node:18.16
+    steps:
+      - run: sudo apt update
+      - run: sudo apt-get install rsync
+      # adds ssh keys from circleci
+      - add_ssh_keys
+      # copies files from repo to pipeline
+      - checkout
+      # copies files from pipeline to vps via ssh
+      - run: rsync -e "ssh -o StrictHostKeyChecking=no" -arvc --delete . $VPS_USER@$VPS_URL:~/projects/superagi
+      - run: >
+          ssh -o StrictHostKeyChecking=no $VPS_USER@$VPS_URL "
+            export PORT=$PORT ; 
+            export DB_USER=$DB_USER ; 
+            export DB_PASS=$DB_PASS ; 
+            export DB_NAME=$DB_NAME ; 
+            export DB_PORT=$DB_PORT ;
+            export DB_TYPE=$DB_TYPE ;
+            export DB_HOST=$DB_HOST ;
+            cd ~/projects/superagi ;
+            docker compose -f docker-compose.prod.yaml up --build -d"
+workflows:
+  build-and-deploy:
+    jobs:
+      - deploy
