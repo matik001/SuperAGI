@@ -1,0 +1,17 @@
+{
+    "editor.formatOnSave": true,
+	"editor.codeActionsOnSave": { 
+        "source.fixAll": true, 
+        "source.fixAll.eslint": true,
+        "source.organizeImports": true 
+    },
+	"files.autoSave": "onFocusChange",
+	"editor.linkedEditing": true,
+	"eslint.enable": true,
+	"eslint.workingDirectories": [{ "mode": "auto" }],
+	"eslint.alwaysShowStatus": true,
+	"eslint.lintTask.enable": true,
+	"javascript.suggest.paths": false,
+	"typescript.suggest.paths": false,
+	"testing.automaticallyOpenPeekView": "never"
+}
