@@ -13,5 +13,6 @@
 	"eslint.lintTask.enable": true,
 	"javascript.suggest.paths": false,
 	"typescript.suggest.paths": false,
-	"testing.automaticallyOpenPeekView": "never"
+	"testing.automaticallyOpenPeekView": "never",
+	"files.eol": "\n"
 }

@@ -9,6 +9,7 @@ declare global {
 		interface ProcessEnv {
 			NODE_ENV: 'development' | 'production';
 			PORT?: string;
+			OPENAI_KEY: string;
 			DB_HOST: string;
 			DB_PORT: string;
 			DB_TYPE: string;
@@ -21,15 +22,14 @@ declare global {
 
 export interface EnvConfig {
 	port: number;
+	openaiKey: string;
 	db: DataSourceOptions;
 }
 
 export const loadConfig = (): EnvConfig => {
-	const p = join(__dirname, '../**/**.entity.{.ts,.js}');
-	console.log(p);
-
 	return {
 		port: parseInt(process.env.PORT ?? '0', 10) || 3000,
+		openaiKey: process.env.OPENAI_KEY,
 		db: {
 			host: process.env.DB_HOST,
 			port: parseInt(process.env.DB_PORT),
@@ -38,7 +38,7 @@ export const loadConfig = (): EnvConfig => {
 			password: process.env.DB_PASS,
 			type: process.env.DB_TYPE as 'postgres' | 'mysql',
 			migrations: [join(__dirname, '../../migrations/**.ts')],
-			entities: [join(__dirname, '../**/**.entity.{.ts,.js}')]
+			entities: [join(__dirname, '../**/**.entity.{ts,js}')]
 		}
 	};
 };
@@ -46,6 +46,7 @@ export const loadConfig = (): EnvConfig => {
 @Injectable()
 export class EnvConfigService implements EnvConfig {
 	constructor(private configService: ConfigService) {}
+	openaiKey: string;
 
 	public get port() {
 		return this.configService.getOrThrow<number>('port');

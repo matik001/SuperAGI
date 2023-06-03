@@ -3,7 +3,8 @@ version: '3.1'
 volumes:
   node_backend:
   node_frontend:
-  
+
+
 services:
   backend:
     build:
@@ -18,11 +19,12 @@ services:
       DB_USER: "$DB_USER"
       DB_NAME: "$DB_NAME"
       DB_PASS: "$DB_PASS"
+      OPENAI_KEY: "$OPENAI_KEY"
     volumes:
       - node_backend:/app/node_modules
     ports:
       - "5000"
-  
+
   frontend_with_proxy:
     build:
       context: ./SuperAGIFrontend
@@ -32,4 +34,3 @@ services:
       - node_frontend:/app/node_modules
     ports:
       - "${PORT}:80"
-

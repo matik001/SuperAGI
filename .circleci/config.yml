@@ -51,6 +51,7 @@ jobs:
             export DB_PORT=$DB_PORT ;
             export DB_TYPE=$DB_TYPE ;
             export DB_HOST=$DB_HOST ;
+            export OPENAI_KEY=$OPENAI_KEY ;
             cd ~/projects/superagi ;
             docker compose -f docker-compose.prod.yaml up --build -d"
 workflows:

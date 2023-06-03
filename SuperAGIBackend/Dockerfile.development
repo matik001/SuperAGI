@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:18
 
 WORKDIR /app
 RUN npm install -g pnpm
@@ -9,6 +9,6 @@ RUN pnpm install
 
 ENV NODE_ENV=development
 
-CMD ["/bin/bash","-c","pnpm typeorm:run-migrations && pnpm start:debug"]
+CMD ["/bin/bash","-c","pnpm run-migrations && pnpm start:debug"]
 
 
