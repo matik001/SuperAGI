@@ -1,7 +1,7 @@
 FROM node:18
 
 WORKDIR /app
-RUN npm install -g pnpm
+RUN npm install -g pnpm typescript ts-node
 COPY package.json ./
 COPY pnpm-lock.yaml ./
 

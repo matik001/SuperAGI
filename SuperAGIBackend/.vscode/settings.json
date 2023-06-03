@@ -14,5 +14,6 @@
 	"javascript.suggest.paths": false,
 	"typescript.suggest.paths": false,
 	"testing.automaticallyOpenPeekView": "never",
-	"files.eol": "\n"
+	"files.eol": "\n",
+	"typescript.preferences.importModuleSpecifier": "relative"
 }

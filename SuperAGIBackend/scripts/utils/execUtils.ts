@@ -1,4 +1,7 @@
 import { exec } from 'child_process';
+import { join } from 'path';
+
+export const FRONTEND_PATH = join(__dirname, '../');
 
 export function exec_or_panic(command: string, cwd: string) {
 	return new Promise<string>((resolve, reject) => {

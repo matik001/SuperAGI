@@ -1,7 +1,4 @@
-import { join } from 'path';
-import { exec_or_panic } from './utils/execUtils';
-
-const FRONTEND_PATH = join(__dirname, '../');
+import { FRONTEND_PATH, exec_or_panic } from './utils/execUtils';
 
 const main = async () => {
 	const migrationName = process.argv[2];

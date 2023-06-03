@@ -2,7 +2,6 @@ version: '3.1'
 
 volumes:
   psql_volume:
-  dependencies:
 
 
 services:
@@ -24,7 +23,6 @@ services:
       dockerfile: Dockerfile.development
     restart: always
     volumes:
-      - dependencies:/app/node_modules
       - ./SuperAGIBackend:/app
     ports:
       - "5000:5000"

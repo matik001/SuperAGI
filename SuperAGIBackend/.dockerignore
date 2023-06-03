@@ -11,3 +11,6 @@ npm-debug.log
 npm-debug.log.*
 .dockerignore
 .gitignore
+
+.env.migration
+.env.migration.example

@@ -1,7 +1,6 @@
 version: '3.1'
 
 volumes:
-  node_backend:
   node_frontend:
 
 
@@ -20,8 +19,6 @@ services:
       DB_NAME: "$DB_NAME"
       DB_PASS: "$DB_PASS"
       OPENAI_KEY: "$OPENAI_KEY"
-    volumes:
-      - node_backend:/app/node_modules
     ports:
       - "5000"
 
