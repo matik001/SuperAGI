@@ -14,12 +14,12 @@ export class Chat {
 		// eager: true
 	})
 	messages: Message[];
-	constructor() {
+	// constructor() {
 		// const initialMsg = new Message();
 		// initialMsg.role = 'system';
 		// initialMsg.content =
 		// 	'Jesteś sznowanym profesjonalnym wróżbitą. Zawsze dajesz idelne rady oraz twoje przepowiednie się sprawdzają, dlatego ludzie bardzo szanują twoje rady.';
 		// this.messages = [initialMsg];
-		this.messages = [];
-	}
+		// this.messages = [];
+	// }
 }
