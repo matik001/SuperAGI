@@ -18,7 +18,12 @@ export class ChatController {
 
 	@Get(':id')
 	findOne(@Param('id') id: string) {
-		return this.chatService.findOne(+id);
+		return this.chatService.getWithMessages(+id);
+	}
+
+	@Get(':id')
+	delete(@Param('id') id: string) {
+		return this.chatService.delete(+id);
 	}
 
 	@Post(':id/messages')

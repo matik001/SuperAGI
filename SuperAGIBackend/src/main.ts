@@ -22,6 +22,7 @@ async function bootstrap() {
 			whitelist: true
 		})
 	);
+
 	const configService = app.get(EnvConfigService);
 	await app.listen(configService.port, () => {
 		console.log('Server started!');

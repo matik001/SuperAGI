@@ -24,8 +24,8 @@ services:
       dockerfile: Dockerfile.development
     restart: always
     volumes:
-      - ./SuperAGIBackend:/app
       - node_modules_volume:/app/node_modules
+      - ./SuperAGIBackend:/app
     ports:
       - "5000:5000"
       - "9229:9229"
