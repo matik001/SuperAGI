@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ChatService } from './chat.service';
 import { CreateChatDto } from './dto/create-chat.dto';
 import { CreateMessageDto } from './dto/create-message.dto';
@@ -21,7 +21,7 @@ export class ChatController {
 		return this.chatService.getWithMessages(+id);
 	}
 
-	@Get(':id')
+	@Delete(':id')
 	delete(@Param('id') id: string) {
 		return this.chatService.delete(+id);
 	}

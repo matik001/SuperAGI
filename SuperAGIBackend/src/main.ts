@@ -1,10 +1,18 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { config as envConfig } from 'dotenv';
+import { resolve } from 'path';
 import { AppModule } from './app.module';
 import { EnvConfigService } from './config/EnvConfig.service';
 
 async function bootstrap() {
+	if (process.env.NODE_ENV !== 'production') {
+		envConfig({
+			path: resolve('../', '.env')
+		});
+	}
+
 	const app = await NestFactory.create(AppModule);
 	const config = new DocumentBuilder()
 		.setTitle('Super shortener')
