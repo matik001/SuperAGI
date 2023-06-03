@@ -2,6 +2,7 @@ version: '3.1'
 
 volumes:
   psql_volume:
+  node_modules_volume:
 
 
 services:
@@ -24,6 +25,7 @@ services:
     restart: always
     volumes:
       - ./SuperAGIBackend:/app
+      - node_modules_volume:/app/node_modules
     ports:
       - "5000:5000"
       - "9229:9229"
