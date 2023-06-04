@@ -31,13 +31,19 @@ interface MainTemplatePageProps {
 	showTitle?: boolean;
 	children: ReactNode;
 }
+const Layout = styled.div`
+	/* height: 100%; */
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+`;
 const MainTemplatePage = ({ children, showTitle }: MainTemplatePageProps) => {
 	if (showTitle === undefined) showTitle = true;
 
 	const { isDarkMode, toggle } = useDarkMode(true);
 	const { t, i18n } = useTranslation();
 	return (
-		<>
+		<Layout>
 			<ThemeSwitch
 				checked={isDarkMode}
 				onClick={toggle}
@@ -58,8 +64,8 @@ const MainTemplatePage = ({ children, showTitle }: MainTemplatePageProps) => {
 			</Button>
 			{showTitle && <Title>{t('AppTitle')}</Title>}
 
-			{children}
-		</>
+			<div style={{ flexGrow: 1, position: 'relative' }}>{children}</div>
+		</Layout>
 	);
 };
 

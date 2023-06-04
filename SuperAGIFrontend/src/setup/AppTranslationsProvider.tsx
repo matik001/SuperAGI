@@ -11,14 +11,7 @@ interface AppTranslationsProviderProps {
 const resources = {
 	en: {
 		translation: {
-			AppTitle: 'Super shortener',
-			EnterYourUrl: 'Enter your url',
-			Shorten: 'Shorten',
-			YourUrl: 'Your url',
-			IpInfo: 'IP info',
-			GoToLogs: 'Go to logs',
-			GoToMainPage: 'Go to main page',
-			HeaderName: 'Header name',
+			AppTitle: 'SuperAGI',
 			Value: 'Value',
 			Refresh: 'Refresh',
 			Logs: 'Logs',
@@ -28,14 +21,7 @@ const resources = {
 	},
 	pl: {
 		translation: {
-			AppTitle: 'Super shortener',
-			EnterYourUrl: 'Podaj swój url',
-			Shorten: 'Skróć',
-			YourUrl: 'Twój url',
-			IpInfo: 'IP info',
-			GoToLogs: 'Przejdź to logów',
-			GoToMainPage: 'Przejdź do strony głównej',
-			HeaderName: 'Nazwa nagłówka',
+			AppTitle: 'SuperAGI',
 			Value: 'Wartość',
 			Refresh: 'Odśwież',
 			Logs: 'Logi',

@@ -16,7 +16,7 @@ export default defineConfig({
 	},
 	build: {
 		outDir: './build',
-		sourcemap: true, //// mozna wylaczyc
+		sourcemap: false, //// mozna wylaczyc
 		emptyOutDir: true,
 		commonjsOptions: {
 			defaultIsModuleExports(id) {

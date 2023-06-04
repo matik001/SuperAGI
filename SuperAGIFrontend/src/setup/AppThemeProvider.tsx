@@ -1,14 +1,16 @@
 import { ConfigProvider, theme as antdTheme } from 'antd';
+import { lighten } from 'polished';
 import React, { ReactNode } from 'react';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { useDarkMode } from 'usehooks-ts';
-
 interface AppThemeProviderProps {
 	children: ReactNode;
 }
 const GlobalStyle = createGlobalStyle`
 body, html, #root {
   width: 100%;
+  min-height: 100vh;
+  height: 100vh;
   margin: 0;
   background-color: ${(args) => args.theme.bgColor};
   color: ${(args) => args.theme.textColor};
@@ -37,7 +39,7 @@ const AppThemeProvider: React.FC<AppThemeProviderProps> = ({ children }) => {
 	const themeDark: AppTheme = {
 		primaryColor: 'orange',
 		textColor: 'white',
-		bgColor: '#111111',
+		bgColor: lighten(0.01, '#041527'),
 		isDarkMode: true
 	};
 	const themeLight: AppTheme = {
