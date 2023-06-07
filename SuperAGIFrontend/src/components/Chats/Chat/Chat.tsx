@@ -98,7 +98,8 @@ const Chat: React.FC<ChatProps> = ({ chatId, canInput }) => {
 							right: '5px',
 							bottom: '5px',
 							border: 'none',
-							...(inputMsg.length > 0 ? { backgroundColor: 'green' } : {})
+							...(inputMsg.length > 0 ? { backgroundColor: 'green' } : {}),
+							color: 'white'
 						}}
 						disabled={inputMsg.length === 0}
 						onClick={() => {
