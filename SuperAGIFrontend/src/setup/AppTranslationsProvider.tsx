@@ -21,7 +21,7 @@ const resources = {
 			assistant: 'Assistant',
 			user: 'User',
 			system: 'System',
-			Add: 'Dodaj'
+			Add: 'Add'
 		}
 	},
 	pl: {
@@ -36,7 +36,7 @@ const resources = {
 			assistant: 'Asystent',
 			user: 'Użytkownik',
 			system: 'System',
-			Add: 'Add'
+			Add: 'Dodaj'
 		}
 	}
 };
