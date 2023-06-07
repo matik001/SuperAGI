@@ -1,15 +1,47 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Button, Spin } from 'antd';
+import { Button } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import { createMessage, getChatWithMessages, getChatWithMessages_KEY } from 'api/chatApi';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { IoMdSend } from 'react-icons/io';
+import styled from 'styled-components';
+import ChatMessage from './Message/ChatMessage';
 
 interface ChatProps {
 	chatId: number;
 	canInput?: boolean;
 }
 
+const ChatContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	height: 100%;
+	max-height: 100%;
+	padding: 0 50px;
+`;
+const MessagesContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	height: 100%;
+	max-height: 100%;
+	padding: 0 50px;
+	overflow: auto;
+	&::-webkit-scrollbar {
+		width: 10px;
+		height: 11px;
+	}
+	&::-webkit-scrollbar-track {
+		box-shadow: nset 0 0 6px gray;
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: #adadae;
+		border-radius: 5px;
+		border: 2px solid white;
+	}
+`;
 const Chat: React.FC<ChatProps> = ({ chatId, canInput }) => {
 	const queryClient = useQueryClient();
 	const {
@@ -29,42 +61,53 @@ const Chat: React.FC<ChatProps> = ({ chatId, canInput }) => {
 		// 	queryClient.setQueryData([getChatWithMessages_KEY, chatId], data);
 		// }
 	});
+	const { t } = useTranslation();
 	return (
-		<Spin spinning={isLoading} style={{ minHeight: '300px', height: '100%' }}>
-			<>
-				<h1>{chat?.title}</h1>
-				{chat?.messages?.map((a) => (
-					<p key={a.id}>
-						<pre>
-							{a.role} --- {a.content}
-						</pre>
-					</p>
+		// <Spin spinning={isLoading} style={{ width: '100%', height: '100%' }}>
+		<ChatContainer>
+			<MessagesContainer>
+				{chat?.messages?.map((a, idx, arr) => (
+					<ChatMessage
+						key={a.id}
+						message={a}
+						joinUpperMessage={idx > 0 && arr[idx - 1].role === arr[idx].role}
+					/>
 				))}
-				{canInput && (
-					<>
-						<TextArea
-							placeholder="Send a message."
-							autoSize={{ minRows: 1, maxRows: 6 }}
-							style={{ alignSelf: 'end', justifySelf: 'end', padding: '10px' }}
-							onChange={(e) => setInputMsg(e.target.value)}
-							value={inputMsg}
-							onPressEnter={(e) => {
-								e.preventDefault();
-								mutation.mutate();
-							}}
-						/>
-						<Button
-							style={{ position: 'absolute', right: '5px', bottom: '5px' }}
-							onClick={() => {
-								mutation.mutate();
-							}}
-						>
-							<IoMdSend />
-						</Button>
-					</>
-				)}
-			</>
-		</Spin>
+			</MessagesContainer>
+			{canInput && (
+				<div
+					style={{
+						margin: '20px',
+						position: 'relative'
+					}}
+				>
+					<TextArea
+						placeholder={t('SendMessage')}
+						autoSize={{ minRows: 1, maxRows: 6 }}
+						style={{ padding: '10px' }}
+						onChange={(e) => setInputMsg(e.target.value)}
+						value={inputMsg}
+						onPressEnter={(e) => {
+							e.preventDefault();
+							mutation.mutate();
+						}}
+					/>
+					<Button
+						style={{
+							position: 'absolute',
+							right: '5px',
+							bottom: '5px'
+						}}
+						onClick={() => {
+							mutation.mutate();
+						}}
+					>
+						<IoMdSend />
+					</Button>
+				</div>
+			)}
+		</ChatContainer>
+		// </Spin>
 	);
 };
 

@@ -1,46 +1,53 @@
-import { useQuery } from '@tanstack/react-query';
-import { Layout, Menu, MenuProps } from 'antd';
-import Sider from 'antd/es/layout/Sider';
-import { Content } from 'antd/es/layout/layout';
-import { Chat as ChatType, getChats, getChats_KEY } from 'api/chatApi';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { Button, Menu, MenuProps } from 'antd';
+import { Chat as ChatType, createChat, getChats, getChats_KEY } from 'api/chatApi';
 import Chat from 'components/Chats/Chat/Chat';
+import { darken } from 'polished';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { BsChatLeftText } from 'react-icons/bs';
-import { useTheme } from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import MainTemplatePage from './templates/MainTemplatePage';
-
 type MenuItem = Required<MenuProps>['items'][number];
 
-function getItem(label: React.ReactNode, key: React.Key, children?: MenuItem[]): MenuItem {
-	return {
-		key,
-		children,
-		label
-	} as MenuItem;
-}
-const items: MenuItem[] = [
-	getItem('Option 1', '1'),
-	getItem('Option 2', '2'),
-	getItem('User', 'sub1', [getItem('Tom', '3'), getItem('Bill', '4'), getItem('Alex', '5')]),
-	getItem('Team', 'sub2', [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-	getItem('Files', '9')
-];
+const items: MenuItem[] = [];
+
+const Container = styled.div`
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	position: absolute;
+`;
 
 const ChatsPage = () => {
 	const theme = useTheme();
+	const { t } = useTranslation();
 	const [collapsed, setCollapsed] = useState(false);
 	const chats = useQuery([getChats_KEY], () => getChats());
 	const [selectedChat, setSelectedChat] = useState<ChatType | null>(null);
+	const queryClient = useQueryClient();
+
 	useEffect(() => {
 		if (chats.data && chats.data?.length > 0) {
 			setSelectedChat(chats.data[0]);
 		}
 	}, [chats.data]);
+
+	const onAddChat = async () => {
+		await createChat('New chat');
+		queryClient.invalidateQueries([getChats_KEY]);
+	};
 	return (
-		<MainTemplatePage>
-			<Layout style={{ minHeight: '100%' }}>
-				<Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+		<>
+			<MainTemplatePage>
+				<Container style={{ paddingTop: '50px', overflow: 'hidden' }}>
 					<Menu
+						style={{
+							height: '100%',
+							width: 'fit-content',
+							padding: '0 10px'
+						}}
 						theme={theme.isDarkMode ? 'dark' : 'light'}
 						mode="inline"
 						selectedKeys={[selectedChat?.id?.toString() || '0']}
@@ -57,19 +64,22 @@ const ChatsPage = () => {
 							})) || items
 						}
 					/>
-				</Sider>
-				{/* <Layout> */}
-				<Content style={{ margin: '0 16px' }}>
-					{/* <Breadcrumb style={{ margin: '16px 0' }}>
-							<Breadcrumb.Item>User</Breadcrumb.Item>
-							<Breadcrumb.Item>Bill</Breadcrumb.Item>
-						</Breadcrumb> */}
-					{selectedChat && <Chat chatId={selectedChat.id} canInput />}
-				</Content>
-				{/* <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer> */}
-				{/* </Layout> */}
-			</Layout>
-		</MainTemplatePage>
+					<Button
+						onClick={onAddChat}
+						style={{ position: 'absolute', bottom: '30px', left: 30, width: 140 }}
+					>
+						{t('Add')}
+					</Button>
+					<div
+						style={{
+							backgroundColor: darken(0.05, theme.bgColor)
+						}}
+					>
+						{selectedChat && <Chat chatId={selectedChat.id} canInput />}
+					</div>
+				</Container>
+			</MainTemplatePage>
+		</>
 	);
 };
 

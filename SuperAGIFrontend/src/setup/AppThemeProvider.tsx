@@ -10,10 +10,12 @@ const GlobalStyle = createGlobalStyle`
 body, html, #root {
   width: 100%;
   min-height: 100vh;
-  height: 100vh;
   margin: 0;
   background-color: ${(args) => args.theme.bgColor};
   color: ${(args) => args.theme.textColor};
+  position: relative;
+  overflow-x: hidden;
+
 }
 h1{
 	color: ${(args) => args.theme.primaryColor};
@@ -21,6 +23,9 @@ h1{
 }
 *{
 	font-family: 'Roboto', sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 `;
 export interface AppTheme {

@@ -1,8 +1,9 @@
 import { appAxios } from './apiConfig';
 
+export type MessageRole = 'assistant' | 'system' | 'user';
 export interface Message {
 	id: number;
-	role: 'assistant' | 'system' | 'user';
+	role: MessageRole;
 	content: string;
 }
 export interface Chat {

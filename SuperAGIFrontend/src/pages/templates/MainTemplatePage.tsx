@@ -53,9 +53,10 @@ const MainTemplatePage = ({ children, showTitle }: MainTemplatePageProps) => {
 			<Button
 				style={{
 					position: 'fixed',
-					bottom: '20px',
-					right: '20px'
+					right: '95px',
+					top: '25px'
 				}}
+				type="text"
 				onClick={() => {
 					i18n.changeLanguage(i18n.language === 'pl' ? 'en' : 'pl');
 				}}
@@ -64,7 +65,7 @@ const MainTemplatePage = ({ children, showTitle }: MainTemplatePageProps) => {
 			</Button>
 			{showTitle && <Title>{t('AppTitle')}</Title>}
 
-			<div style={{ flexGrow: 1, position: 'relative' }}>{children}</div>
+			<div style={{ flex: 1, position: 'relative' }}>{children}</div>
 		</Layout>
 	);
 };

@@ -16,7 +16,12 @@ const resources = {
 			Refresh: 'Refresh',
 			Logs: 'Logs',
 			NotFound: 'Not found',
-			BackHome: 'Back home'
+			BackHome: 'Back home',
+			SendMessage: 'Send a message.',
+			assistant: 'Assistant',
+			user: 'User',
+			system: 'System',
+			Add: 'Dodaj'
 		}
 	},
 	pl: {
@@ -26,7 +31,12 @@ const resources = {
 			Refresh: 'Odśwież',
 			Logs: 'Logi',
 			NotFound: 'Nie znaleziono',
-			BackHome: 'Powrót na stronę główną'
+			BackHome: 'Powrót na stronę główną',
+			SendMessage: 'Wyślij wiadomość.',
+			assistant: 'Asystent',
+			user: 'Użytkownik',
+			system: 'System',
+			Add: 'Add'
 		}
 	}
 };
