@@ -27,7 +27,7 @@ const Box = styled.div<{
 }>`
 	padding: 10px 20px;
 	border-radius: 18px;
-	margin: ${(p) => (p.joinUpperMessage ? '5px 0 0 0' : '20px 0 0 0')};
+	margin: ${(p) => (p.joinUpperMessage ? '5px 0 0 0' : '22px 0 0 0')};
 	max-width: 95%;
 	background-color: ${(props) => props.backgroundColor};
 	color: ${(props) => props.textColor};

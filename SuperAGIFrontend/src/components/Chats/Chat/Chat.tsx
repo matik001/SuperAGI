@@ -27,7 +27,7 @@ const MessagesContainer = styled.div`
 	justify-content: start;
 	height: 100%;
 	max-height: 100%;
-	padding: 0 50px;
+	padding: 20px 50px 10px 50px;
 	overflow: auto;
 	&::-webkit-scrollbar {
 		width: 10px;
@@ -96,8 +96,11 @@ const Chat: React.FC<ChatProps> = ({ chatId, canInput }) => {
 						style={{
 							position: 'absolute',
 							right: '5px',
-							bottom: '5px'
+							bottom: '5px',
+							border: 'none',
+							...(inputMsg.length > 0 ? { backgroundColor: 'green' } : {})
 						}}
+						disabled={inputMsg.length === 0}
 						onClick={() => {
 							mutation.mutate();
 						}}
