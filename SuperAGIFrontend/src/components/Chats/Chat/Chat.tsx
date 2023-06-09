@@ -88,6 +88,7 @@ const Chat: React.FC<ChatProps> = ({ chatId, canInput }) => {
 						onChange={(e) => setInputMsg(e.target.value)}
 						value={inputMsg}
 						onPressEnter={(e) => {
+							if (e.shiftKey) return;
 							e.preventDefault();
 							mutation.mutate();
 						}}

@@ -32,6 +32,7 @@ const Box = styled.div<{
 	background-color: ${(props) => props.backgroundColor};
 	color: ${(props) => props.textColor};
 	align-self: ${(props) => (props.role === 'user' ? 'end' : 'start')};
+	white-space: pre-wrap;
 `;
 const ChatMessage: React.FC<ChatMessageProps> = ({
 	message: { content, id, role },
