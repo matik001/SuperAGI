@@ -1,7 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Button } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
-import { createMessage, getChatWithMessages, getChatWithMessages_KEY } from 'api/chatApi';
+import {
+	ChatWithMessages,
+	createMessage,
+	getChatWithMessages,
+	getChatWithMessages_KEY
+} from 'api/chatApi';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IoMdSend } from 'react-icons/io';
@@ -54,12 +59,22 @@ const Chat: React.FC<ChatProps> = ({ chatId, canInput }) => {
 	const [inputMsg, setInputMsg] = useState('');
 	const mutation = useMutation({
 		mutationFn: () => {
+			if (!chat) return Promise.resolve();
 			setInputMsg('');
-			return createMessage(chatId, inputMsg);
+			const promise = createMessage(chatId, inputMsg);
+			queryClient.setQueryData([getChatWithMessages_KEY, chatId], {
+				...chat,
+				messages: [
+					...(chat.messages ?? []),
+					{
+						id: undefined, /// TODO better id
+						content: inputMsg,
+						role: 'user'
+					}
+				]
+			} as ChatWithMessages);
+			return promise;
 		}
-		// onSuccess: (data) => {
-		// 	queryClient.setQueryData([getChatWithMessages_KEY, chatId], data);
-		// }
 	});
 	const { t } = useTranslation();
 	return (
